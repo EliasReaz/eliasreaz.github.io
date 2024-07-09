@@ -23,7 +23,7 @@ avatar_image: /img/IMZ_rz_9Jul24_square.JPG
 #-------------------------------
 # Contact links
 linkedln: "https://linkedln.com/in/reaz-ussalamelias/" # Add your linkedln handle
-github: "https://github.com/EliasReaz#"  # Add your github handle
+github: "https://github.com/EliasReaz"  # Add your github handle
 
 paginate: 6
 paginate_path: "/page/:num"
