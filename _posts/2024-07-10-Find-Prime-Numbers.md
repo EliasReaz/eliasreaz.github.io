@@ -5,21 +5,21 @@ image: "/posts/primes_image.jpeg"
 tags: [Python, Primes]
 ---
 
-Prime number is a natural number that is greater than 1 and has two distinct divisors, 1 and itself. For example, 2, 3, 5, 7, 11, 13, and so on. In this post I'm going to run through a function in Python that can quickly find all the Prime numbers below a given value. I have cleverly utilized python set() function to find prime numbers. 
+Prime number is a natural number that is greater than 1 and has two distinct divisors, 1 and itself. For example, 2, 3, 5, 7, 11, 13 are prime numbers as they all have only two distinct divisors, 1 and the number itself. In this post I'm presenting a Python script that can quickly find all the Prime numbers below a given value, n. I have utilized Python set() functions in this regard. 
 
 Let's get into it!
 
 ---
 
-First let's set a variable n which is the upper limit numbers we want to search through. We'll start with 20 to search all prime numbers that exist that are equal to or smaller than 20.
+First let's set a variable n, which is the upper limit of a series from 2 to n. This is the series we like to search through to detect prime numbers. As an example, we set n=20. 
 
 ```python
 n = 20
 ```
 
-The smallest true Prime number is 2, so we want to start by creating a list of numbers than need checking so every integer between 2 and n (n is the upper bound). We use n+1 as the range logic is not inclusive of the upper limit we set there
+We use n+1 in the range logic, range(2, n+1), as n+1 is not inclusive of the upper limit and 1 is not a prime number.
 
-Instead of using a list, we're going to use a set.  The reason for this is that set has a special function, difference_update(), that will allow us to eliminate non-primes during our search. 
+Instead of using a list, we use a set as set has a special function, difference_update(), that will allow us to eliminate non-primes during our search. We will see soon how set function is utilized. 
 
 ```python
 number_range = set(range(2, n+1))
@@ -28,7 +28,7 @@ print(number_range)
 
 ```
 
-Let's make a placeholder prime_list where we can store any primes we discover. 
+Let's make a placeholder, prime_list, where we can append any primes as we loop over number_range. 
 
 ```python
 primes_list = []
