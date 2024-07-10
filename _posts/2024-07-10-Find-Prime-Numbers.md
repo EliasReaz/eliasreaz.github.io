@@ -5,7 +5,7 @@ image: "/posts/primes_image.jpeg"
 tags: [Python, Primes]
 ---
 
-Prime number is a natural number that is greater than 1 and has two distinct divisors, 1 and itself. For example, 2, 3, 5, 7, 11, 13 are prime numbers as they all have only two distinct divisors, 1 and the number itself. In this post I'm presenting a Python script that can quickly find all the Prime numbers below a given value, n. I have utilized Python set() functions in this regard. 
+Prime number is a natural number that is greater than 1 and has two distinct divisors, 1 and itself. For example, 2, 3, 5, 7, 11, 13 are prime numbers as they all have only two distinct divisors, 1 and the number itself. In this post I'm presenting a Python script that can quickly find all the Prime numbers below a given value n. The speciality of the script lies in utilizing Python set() function, **difference_update()**, to separate prime numbers from a given series of numbers from 2 to n. 
 
 Let's get into it!
 
@@ -19,7 +19,7 @@ n = 20
 
 We use n+1 in the range logic, range(2, n+1), as n+1 is not inclusive of the upper limit and 1 is not a prime number.
 
-Instead of using a list, we use a set as set has a special function, difference_update(), that will allow us to eliminate non-primes during our search. We will see soon how set function is utilized. 
+Instead of using a list, we use a set. Set has a special function, difference_update(), that will allow us to eliminate non-primes during our search. We will see soon how this function is utilized. 
 
 ```python
 number_range = set(range(2, n+1))
@@ -34,56 +34,35 @@ Let's make a placeholder, prime_list, where we can append any primes as we loop 
 primes_list = []
 ```
 
-We're going to end up using a while loop to iterate through our list and check for primes, but before we construct that I always it valuable to code up the logic and iterate manually first.  This means I can check that it is working correctly before I set it off to run through everything on it's own
+We iterate through number_range using a while loop until the number_range becomes empty. We have used pop() funcion to empty the number_range when we detect a prime number. 
 
-So, we have our set of numbers (called number_range to check all integers between 2 and 20. Let's extract the first number from that set that we want to check as to whether it's a prime. When we check the value we're going to check if it is a prime...if it is, we're going to add it to our list called primes_list...if it isn't a prime we don't want to keep it
+As 2 is a prime number, we pop out 2, keep in a placeholder named **prime** and append **prime** to **prime_list**. 
 
-There is a method which will remove an element from a list or set and provide that value to us, and that method is called *pop*
+```python
 
-If we use pop, and assign this to the object called **prime** it will *pop* the first element from the set out of **number_range**, and into **prime**
-
-```ruby
 prime = number_range.pop()
 print(prime)
 >>> 2
 print(number_range)
 >>> {3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
-```
 
-Now, we know that the very first value in our range is going to be a prime...as there is nothing smaller than it so therefore nothing else could possible divide evenly into it.  As we know it's a prime, let's add it to our list of primes...
-
-```ruby
 primes_list.append(prime)
 print(primes_list)
 >>> [2]
 ```
 
-Now we're going to do a special trick to check our remaining number_range for non-primes. For the prime number we just checked (in this first case it was the number 2) we want to generate all the multiples of that up to our upper range (in our case, 20).
+Now we do a special trick to check our remaining number_range for non-primes. For the prime number we just checked (in this first case it was the number 2) we want to generate all the multiples of that up to our upper range (in our case, 20).
 
-We're going to again use a set rather than a list, because it allows us some special functionality that we'll use soon, which is the magic of this approach.
+We're going to again use a set rather than a list, because it allows us to use difference_update() function.
 
-```ruby
+```python
 multiples = set(range(prime*2, n+1, prime))
-```
-
-Remember that when created a range the syntax is range(start, stop, step). For the starting point - we don't need our number as that has already been added as a prime, so let's start our range of multiples at 2 * our number as that is the first multiple, in our case, our number is 2 so the first multiple will be 4. If the number we were checking was 3 then the first multiple would be 6 - and so on.
-
-For the stopping point of our range - we specify that we want our range to go up to 20, so we use n+1 to specify that we want 20 to be included.
-
-Now, the **step** is key here.  We want multiples of our number, so we want to increment in steps *of our* number so we can put in **prime** here
-
-Lets have a look at our list of multiples...
-
-```ruby
 print(multiples)
 >>> {4, 6, 8, 10, 12, 14, 16, 18, 20}
 ```
-
-The next part is the magic I spoke about earlier, we're using the special set functionality **difference_update** which removes any values from our number range that are multiples of the number we just checked. The reason we're doing this is because if a number is a multiple of anything other than 1 or itself then it is **not a prime number** and can remove it from the list to be checked.
-
 Before we apply the **difference_update**, let's look at our two sets.
 
-```ruby
+```python
 print(number_range)
 >>> {3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
 
@@ -91,11 +70,11 @@ print(multiples)
 >>> {4, 6, 8, 10, 12, 14, 16, 18, 20}
 ```
 
+The next part is using the special set functionality **difference_update** which removes any values from our number range that are multiples of the number we just checked. The reason we're doing this is because if a number is a multiple of anything other than 1 or itself then it is **not a prime number** and can remove it from the list to be checked.
+
 **difference_update** works in a way that will update one set to only include the values that are *different* from those in a second set
 
-To use this, we put our initial set and then apply the difference update with our multiples
-
-```ruby
+```python
 number_range.difference_update(multiples)
 print(number_range)
 >>> {3, 5, 7, 9, 11, 13, 15, 17, 19}
