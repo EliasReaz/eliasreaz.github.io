@@ -9,7 +9,7 @@ plugins:
 #-------------------------------
 # General Site Settings
 title: Reaz Elias
-description: "Hi, It is Reaz, a Data Scientist, showcasing some interesting projects I've recently undertaken, with a strong emphasis on business impact. Please have a look at my Github & LinkedIn pages."
+description: "Hi, I'm Reaz, a Data Scientist & Analyst.  My portfolio site showcases interesting projects I've recently undertaken, with a strong emphasis on business impact. Please also look at my Github & LinkedIn."
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
