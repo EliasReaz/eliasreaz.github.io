@@ -9,26 +9,25 @@ Our client, a grocery retailer, hired a market research consultancy to append ma
 
 # Table of contents
 
-- [00. Project Overview](#overview-main)
-    - [Context](#overview-context)
-    - [Actions](#overview-actions)
-    - [Results](#overview-results)
+- [00. Executive Summary](#executive-summary)
+    - [Background and Context](#background-context)
+    - [Results and Summary](#results-summary)
     - [Growth/Next Steps](#overview-growth)
-    - [Key Definition](#overview-definition)
-- [01. Data Overview](#data-overview)
-- [02. Modelling Overview](#modelling-overview)
-- [03. Linear Regression](#linreg-title)
-- [04. Decision Tree](#regtree-title)
-- [05. Random Forest](#rf-title)
-- [06. Modelling Summary](#modelling-summary)
-- [07. Predicting Missing Loyalty Scores](#modelling-predictions)
-- [08. Growth & Next Steps](#growth-next-steps)
+- [01. Technical Details](#technical-details)
+    - [01. Data Overview](#data-overview)
+    - [02. Modelling Overview](#modelling-overview)
+    - [03. Linear Regression](#linreg-title)
+    - [04. Decision Tree](#regtree-title)
+    - [05. Random Forest](#rf-title)
+    - [06. Modelling Summary](#modelling-summary)
+    - [07. Predicting Missing Loyalty Scores](#modelling-predictions)
+-     [08. Growth & Next Steps](#growth-next-steps)
 
-___
+---
 
-# Project Overview  <a name="overview-main"></a>
+# Executive Summary  <a name="executive-summary"></a>
 
-### Context <a name="overview-context"></a>
+### Background and Context <a name="background-context"></a>
 
 Our client, a grocery retailer, hired a market research consultancy to append market level customer loyalty information to the database.  However, only around 50% of the client's customer base could be tagged, thus the other half did not have this information present.
 
