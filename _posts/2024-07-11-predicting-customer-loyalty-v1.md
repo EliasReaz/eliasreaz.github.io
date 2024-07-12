@@ -69,7 +69,7 @@ The retailer has customer details, their transactions history, and loyalty score
 |TABLE NAME | Field name |Field name     | Field name        |   Field name  |   Field name |
 |---        | ---             |--           |---      |---     | ---|
 |customer_details|customer_id|distance_from_shop|gender| credit_score|
-|transactions|  customer_id|trasaction_date | num_items | product_area_id |sales_cost |
+|transactions|  customer_id|transaction_date | num_items | product_area_id |sales_cost |
 |customer_loyalty_scores|customer_id|loyalty_score| | | |
 
 #### customer_details Table
@@ -82,21 +82,11 @@ The retailer has customer details, their transactions history, and loyalty score
 
 #### transactions Table
 
-| customer_id |  trasaction_date | transaction_id | product_area_id | num_items | sales_cost |
+| customer_id |  transaction_date | transaction_id | product_area_id | num_items | sales_cost |
 | ----        | ----             |-------------    | -------       | -------   | -------  |
 |647          | 2020-04-01       | 4355233          |   4         | 3           |9.33      |
 |647          | 2020-04-01       | 4355233          |   3         | 4           |23.82      |
 |439          | 2020-07-15       | 4355500          |   4         | 1           |6.83      |
-
-#### product_areas Table:
-
-| product_area_id |  product_area_name | profit_margin |
-|------------------| ------------------|----------------|
-| 1                | Non-Food          | 0.25           |
-| 2                | Vegetables         | 0.18           |
-| 3                | Fruit              | 0.14           |
-| 4                | Dairy              | 0.19           |
-| 5                | Meat               | 0.11           |
 
 #### loyalty_scores Table:
 
@@ -107,7 +97,9 @@ The retailer has customer details, their transactions history, and loyalty score
 | 796        | 0.428                  |
 
 ### Data Processing <a name="data-processing"></a>
+We find that data are scattered in three different tables - customer details, loyalty scores, and transactons. So we did some feature engneering as follows:
 
+- merge customer_details with loyalty_scores table on customer id, so that we have loyalty scores (both non null and null) along with distance_from_shop, gender, and credit_score. We name this dataframe as grocery_data.
 
 ```python
 import pandas as pd
@@ -122,9 +114,15 @@ transactions = pd.read_excel("data/grocery_database.xlsx", sheet_name="transacti
 ###########################################
 grocery_data = pd.merge(left=customer_details, right=loyalty_score, 
                         how="left", on="customer_id")
+```
+
+- make new features from transactions table grouping by customer_id for aggregating each customer's total_cost, total_num_items, transaction_count, and product area count. We name this dataframe as sales_summary.
+  
+<br>
+
+```python
 ##########################################
-# groupby customers from transactions aggregating total sales cost, total number of items,
-# count of transaction, and product area id 
+# groupby customers from transactions aggregating total sales cost, total number of items, count of transaction, and product area id 
 ###########################################
 
 sales_summary = transactions.groupby("customer_id").agg({"sales_cost":"sum", 
@@ -134,21 +132,48 @@ sales_summary = transactions.groupby("customer_id").agg({"sales_cost":"sum",
 sales_summary.columns = ["customer_id", "total_sales", "total_items", 
                          "transaction_count", "product_area_count"]
 
-## Assumption is that customers with higher mean value per transaction is more loyal 
-sales_summary["average_basket_value"] = sales_summary["total_sales"]/sales_summary["transaction_count"]
+```
+<br>
+
+- merge dataframes, grocery_data and sales_summary
+
+<br>
+
+```python
 ################################################
 ## merge sales_summary with grocery_data
 ################################################
 data_for_regression= pd.merge(grocery_data, sales_summary, how="inner", on="customer_id")
 print(data_for_regression.tail())
 
+```
+
+<br>
+
+- make a feature named average_busket_value assuming that customers with higher average value per transaction will be more loyal.
+
+<br>
+
+```python
+## Assumption is that customers with higher mean value per transaction is more loyal 
+sales_summary["average_basket_value"] = sales_summary["total_sales"]/sales_summary["transaction_count"]
+
+```
+
+<br>
+
+- make two dataframes - one dataset for modeling having loyalty scores and the other dataset for predicting with no layalty scores.
+- save two dataframes as pickel files for future use,
+
+
+```python
 ####################################################
-## data having loyalty scores are used for model building  
+## data for model building  having loyalty scores are used 
 #####################################################
 regression_modeling = data_for_regression.loc[data_for_regression["customer_loyalty_score"].notna()]
-####################################################
-## data has no loyalty scores are used for prediction 
-#####################################################
+###############################################
+## data for prediction  with no loyalty scores 
+##############################################
 regression_scoring = data_for_regression.loc[data_for_regression["customer_loyalty_score"].isna()]
 
 regression_scoring.drop(["customer_loyalty_score"], axis=1, inplace=True)
@@ -166,7 +191,7 @@ After this data pre-processing in Python, we have a dataset for modelling that c
 
 | **Variable Name** | **Variable Type** | **Description** |
 |---|---|---|
-| *loyalty_score* | *Dependent* | The % of total grocery spend that each customer allocates to ABC Grocery vs. competitors |
+| **loyalty_score** | **Dependent** | The % of total grocery spend that each customer allocates to ABC Grocery vs. competitors |
 | distance_from_store | Independent | "The distance in miles from the customers home address, and the store" |
 | gender | Independent | The gender provided by the customer |
 | credit_score | Independent | The customers most recent credit score |
