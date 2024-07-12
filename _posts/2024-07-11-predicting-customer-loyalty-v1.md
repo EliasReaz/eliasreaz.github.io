@@ -47,7 +47,7 @@ Currently the retailer database has loyalty score for 50% of customers. **This p
 <br>
 <br>
 
-![alt text](/img/post/rf-regression-permutation-importance.png "Random Forest Permutation Importance Plot")
+![alt text](/img/posts/rf-regression-permutation-importance.png "Random Forest Permutation Importance Plot")
 
 ### Growth/Next Steps <a name="growth-next-steps"></a>
 
