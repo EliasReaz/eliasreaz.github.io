@@ -8,15 +8,19 @@ tags: [Customer Loyalty, Machine Learning, Regression, Python]
 Our client, a grocery retailer, hired a market research consultancy to append market level customer loyalty information to the database.  However, only around 50% of the client's customer base could be tagged, thus the other half did not have this information present.  Let's use ML to solve this!
 
 ## Table of contents
-
 - [Table of contents](#table-of-contents)
-- [Executive Summar](#executive-summary)
-  - [Context](#context)
-  - [Objective](#objective)
-  - [Results and Summary](#results-summary)
-  - [Growth/Next Step](#growth-next-steps)
-- [Technical Details](#technical-details)
-  - [Data Overview](#data-overview)
+- [Executive Summary](#executive-summary-)
+  - [Context](#context-)
+  - [Objective](#objective-)
+  - [Results and Summary](#results-and-summary-)
+  - [Growth/Next Steps](#growthnext-steps-)
+- [Technical Details](#technical-details--)
+  - [Data Overview](#data-overview-)
+    - [customer\_details Table](#customer_details-table)
+    - [transactions Table](#transactions-table)
+    - [product\_areas Table:](#product_areas-table)
+    - [loyalty\_scores Table:](#loyalty_scores-table)
+  - [Data Processing](#data-processing)
   
 ---
 
@@ -64,8 +68,8 @@ The retailer has customer details, their transactions history, and loyalty score
 
 |TABLE NAME | Field name |Field name     | Field name        |   Field name  |   Field name |
 |---        | ---             |--           |---      |---     | ---|
-|transactions|  customer_id|trasaction_date | num_items | product_area_id |sales_cost |
 |customer_details|customer_id|distance_from_shop|gender| credit_score|
+|transactions|  customer_id|trasaction_date | num_items | product_area_id |sales_cost |
 |customer_loyalty_scores|customer_id|loyalty_score| | | |
 
 #### customer_details Table
@@ -99,6 +103,79 @@ The retailer has customer details, their transactions history, and loyalty score
 | 104        | 0.587                  |
 | 69        | 0.156                  |
 | 796        | 0.428                  |
+
+### Data Processing <a name="data-processing"></a>
+
+
+```python
+import pandas as pd
+import pickle
+
+loyalty_score = pd.read_excel("data/grocery_database.xlsx", sheet_name="loyalty_scores")
+customer_details = pd.read_excel("data/grocery_database.xlsx", sheet_name="customer_details")
+transactions = pd.read_excel("data/grocery_database.xlsx", sheet_name="transactions")
+
+##########################################
+# merge customer_details and loyalty_score
+###########################################
+grocery_data = pd.merge(left=customer_details, right=loyalty_score, 
+                        how="left", on="customer_id")
+##########################################
+# groupby customers from transactions aggregating total sales cost, total number of items,
+# count of transaction, and product area id 
+###########################################
+
+sales_summary = transactions.groupby("customer_id").agg({"sales_cost":"sum", 
+                                        "num_items":"sum", 
+                                        "transaction_id":"count", 
+                                        "product_area_id":"nunique"}).reset_index()
+sales_summary.columns = ["customer_id", "total_sales", "total_items", 
+                         "transaction_count", "product_area_count"]
+
+## Assumption is that customers with higher mean value per transaction is more loyal 
+sales_summary["average_basket_value"] = sales_summary["total_sales"]/sales_summary["transaction_count"]
+################################################
+## merge sales_summary with grocery_data
+################################################
+data_for_regression= pd.merge(grocery_data, sales_summary, how="inner", on="customer_id")
+print(data_for_regression.tail())
+
+####################################################
+## data having loyalty scores are used for model building  
+#####################################################
+regression_modeling = data_for_regression.loc[data_for_regression["customer_loyalty_score"].notna()]
+####################################################
+## data has no loyalty scores are used for prediction 
+#####################################################
+regression_scoring = data_for_regression.loc[data_for_regression["customer_loyalty_score"].isna()]
+
+regression_scoring.drop(["customer_loyalty_score"], axis=1, inplace=True)
+#######################################################
+## save as pickle files
+###################################################### 
+pickle.dump(regression_modeling, open("data/regression_modeling.p", "wb"))
+pickle.dump(regression_scoring, open("data/regression_scoring.p", "wb"))
+```
+
+<br>
+After this data pre-processing in Python, we have a dataset for modelling that contains the following fields...
+<br>
+<br>
+
+| **Variable Name** | **Variable Type** | **Description** |
+|---|---|---|
+| *loyalty_score* | *Dependent* | The % of total grocery spend that each customer allocates to ABC Grocery vs. competitors |
+| distance_from_store | Independent | "The distance in miles from the customers home address, and the store" |
+| gender | Independent | The gender provided by the customer |
+| credit_score | Independent | The customers most recent credit score |
+| total_sales | Independent | Total spend by the customer in ABC Grocery within the latest 6 months |
+| total_items | Independent | Total products purchased by the customer in ABC Grocery within the latest 6 months |
+| transaction_count | Independent | Total unique transactions made by the customer in ABC Grocery within the latest 6 months |
+| product_area_count | Independent | The number of product areas within ABC Grocery the customers has shopped into within the latest 6 months |
+| average_basket_value | Independent | The average spend per transaction for the customer in ABC Grocery within the latest 6 months |
+
+
+
 
 
 
