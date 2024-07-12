@@ -89,6 +89,7 @@ The retailer has customer details, their transactions history, and loyalty score
 |439          | 2020-07-15       | 4355500          |   4         | 1           |6.83      |
 
 #### product_areas Table:
+
 | product_area_id |  product_area_name | profit_margin |
 |------------------| ------------------|----------------|
 | 1                | Non-Food          | 0.25           |
@@ -98,6 +99,7 @@ The retailer has customer details, their transactions history, and loyalty score
 | 5                | Meat               | 0.11           |
 
 #### loyalty_scores Table:
+
 |customer_id | customer_loyalty_score |
 | -----      | ----------             |
 | 104        | 0.587                  |
