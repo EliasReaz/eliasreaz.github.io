@@ -12,6 +12,7 @@ Our client, a grocery retailer, hired a market research consultancy to append ma
 - [Table of contents](#table-of-contents)
 - [Executive Summar](#executive-summary)
   - [Context](#context)
+  - [Objective](#objective)
   - [Results and Summary](#results-summary)
   - [Growth/Next Step](#growth-next-steps)
 - [Technical Details](#technical-details)
@@ -24,6 +25,8 @@ Our client, a grocery retailer, hired a market research consultancy to append ma
 ### Context <a name="context"></a>
 
 Customers who trust  retailer's products and find the products benecifical are expected to visit the shop again and will buy products/offers more. We tag these customers as loyal customers and we assign a measure called **loyalty score** to customers. By loyalty score we refer to the % of grocery spend (market level) that each customer allocates in our client retailer against all of the retailer's competitors. If customer A has total grocery budget of 100 dollars and she spends 80 dollars with our client, her loyalty score is 0.80. If customer B has total grocery budget of 200 dollars and he spends 35% with our client and 65% with all competitors, his loyalty score is 0.35.
+
+### Objective <a name="objective"></a>
 
 Currently the retailer database has loyalty score for 50% of customers. **This project aims to accurately estimate loyalty score for the rest of customers** based on the pattern or relationship of customer traits/ features that are available in the database. These traits/ features (we also say input features) are the customer proximity around the retailer shop, total expenditure, number of product types, total number of items, customer credit score, and gender.
 
