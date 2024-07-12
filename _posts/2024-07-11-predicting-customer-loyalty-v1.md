@@ -39,12 +39,11 @@ Currently the retailer database has loyalty score for 50% of customers. **This p
 - To understand which customer traits influence the loyalty score, we have investigated relative feature importance and found that customers who live near the retailer shop are more loyal than who shop from far. For details, please see the following table and figure.
 
 |ML Model | Adjusted r-squared | r-squared (Cross Validation K=4) |
-|---      | ---                 | --- |
+|---      | :---:              | :---: |
 |Random Forest | 0.955 | 0.925|
 |Decision Tree | 0.886 | 0.871|
 |Linear Regression | 0.754 | 0.853|
 
-<br>
 <br>
 
 ![alt text](/img/posts/rf-regression-permutation-importance.png "Random Forest Permutation Importance Plot")
@@ -55,10 +54,7 @@ Currently the retailer database has loyalty score for 50% of customers. **This p
 - Employ ML model like XGBoost and see how the model performs.
 - Study more customer traits like house income, age, job/business types if available in future and make new features.
 
-
 <br>
-<br>
-
 
 ## Technical Details  <a name="technical-details"></a>
 
@@ -66,8 +62,43 @@ Currently the retailer database has loyalty score for 50% of customers. **This p
 
 The retailer has customer details, their transactions history, and loyalty score for the half of customers.
 
-|TABLE NAME | Field name |Field name     | Field name        |   Field name     |
-|---        | ---             |--           |---      |---     |
-|transactions|  customer_id|trasaction_date | product_name_id | total_sales|
-|customer_details|customer_id|distance_from_shop|gender|
-|customer_loyalty_scores|customer_id|loyalty_score| | 
+|TABLE NAME | Field name |Field name     | Field name        |   Field name  |   Field name |
+|---        | ---             |--           |---      |---     | ---|
+|transactions|  customer_id|trasaction_date | num_items | product_area_id |sales_cost |
+|customer_details|customer_id|distance_from_shop|gender| credit_score|
+|customer_loyalty_scores|customer_id|loyalty_score| | | |
+
+#### customer_details Table
+
+| customer_id |  distance_from_store | gender | credit_score |
+| ------       | -------             |---    | ---         |  
+|754          | 1.17                 | M      | 0.75       |
+|865          | 0.17                 | F      | 0.35       |
+|954          |                      | M      |           |
+
+#### transactions Table
+
+| customer_id |  trasaction_date | transaction_id | product_area_id | num_items | sales_cost |
+| ----        | ----             |-------------    | -------       | -------   | -------  |
+|647          | 2020-04-01       | 4355233          |   4         | 3           |9.33      |
+|647          | 2020-04-01       | 4355233          |   3         | 4           |23.82      |
+|439          | 2020-07-15       | 4355500          |   4         | 1           |6.83      |
+
+#### product_areas Table:
+| product_area_id |  product_area_name | profit_margin |
+|------------------| ------------------|----------------|
+| 1                | Non-Food          | 0.25           |
+| 2                | Vegetables         | 0.18           |
+| 3                | Fruit              | 0.14           |
+| 4                | Dairy              | 0.19           |
+| 5                | Meat               | 0.11           |
+
+#### loyalty_scores Table:
+|customer_id | customer_loyalty_score |
+| -----      | ----------             |
+| 104        | 0.587                  |
+| 69        | 0.156                  |
+| 796        | 0.428                  |
+
+
+
