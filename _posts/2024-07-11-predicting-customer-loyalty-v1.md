@@ -43,7 +43,7 @@ By loyalty score we mean the percent of grocery spend (market level) that each c
 <br>
 <br>
 
-![alt text](rf-regression-permutation-importance.png "Random Forest Permutation Importance Plot")
+![alt text](/img/post/rf-regression-permutation-importance.png "Random Forest Permutation Importance Plot")
 
 ### Growth/Next Steps <a name="growth-next-steps"></a>
 
