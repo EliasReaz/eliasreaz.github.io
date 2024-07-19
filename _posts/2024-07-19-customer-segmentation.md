@@ -64,10 +64,6 @@ Finally customers in *Cluster 2* spent significant portions within Dairy, Fruit 
 To help embed this segmentation into the business, we have proposed to call this the "You Are What You Eat" segmentation.
 
 <br>
-
-![alt text](/img/posts/ABC_grocery_customer_segmentation.png "Three categories of shoppers and their proportions of shopping: Casual, Vegetarian, Vegan")
-
-<br>
 <br>
 ### Growth/Next Steps <a name="overview-growth"></a>
 
