@@ -13,12 +13,11 @@ We have converted a 29 page Earnings Call Transcript from Nike to a 1 page bulle
     - [Context](#overview-context)
     - [Actions and Result](#overview-actions)
     - [Key Definition](#overview-definition)
-- [01. Snapshot of pdf report to be summarized](#data-overview)
-- [02. Loading Libraries](#loading-libraries)
-- [03. Load document and initialize model](#load-doc-initialize-model)
-- [04. Prompt Template and LLMChain to run queries against LLM](#Prompt-LLMChain)
-- [05. Response](#response)
-- [06. Summary](#summary)
+- [01. Loading Libraries](#loading-libraries)
+- [02. Load document and initialize model](#load-doc-initialize-model)
+- [03. Prompt Template and LLMChain to run queries against LLM](#Prompt-LLMChain)
+- [04. Response](#response)
+- [05. Summary](#summary)
   
 ___
 
@@ -39,10 +38,6 @@ Large Language Models (LLMs) are machine learning models that can comprehend and
 LangChain is a framework for developing applications powered by Large Language Models (LLMs). 
 
 PyPDFLoader(filepath).load() reads pdf file, splits text by page, index each page in standardized LangChain document structure with "metadata" and "page_content"
-
-# Snapshot of pdf report to be summarized <a name="data-overview"></a>
-
-<object src="/img/posts/NIKE-Inc-Q3FY24-OFFICIAL-Transcript-FINAL.pdf"></object>
 
 # Loading Libraries <a name="loading-libraries"></a>
 
