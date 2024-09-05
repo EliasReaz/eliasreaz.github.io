@@ -41,6 +41,7 @@ PyPDFLoader(filepath).load() reads pdf file, splits text by page, index each pag
 
 # Snapshot of pdf report to be summarized <a name="data-overview"></a>
 
+<embed src="/img/posts/NIKE-Inc-Q3FY24-OFFICIAL-Transcript-FINAL.pdf" type"application/pdf">
 
 # Loading Libraries <a name="loading-libraries"></a>
 
