@@ -5,7 +5,7 @@ image: "/posts/LangChain_logo.png"
 tags: [Generative AI, OpenAI, LangChain, Python]
 ---
 
-We have converted a 29 page Earnings Call Transcript from Nike to a 1 page bullet point summary leveraging Generative AI.  
+Using Generative AI, we have converted a 29 page Earnings Call Transcript from Nike to a 1 page bullet point summary.  
 
 # Table of contents
 
@@ -26,7 +26,7 @@ ___
 
 ### Context <a name="overview-context"></a>
 
-Imagine we have tons of pdf reports and we need to summarize each of these report within a short period of time. Using human resources and manually summarizing each long report would take hours to complete, edit, and finalize a summary report. Generative AI has a rescue to make hunders of long reports' summary within minutes. As an use-case, we have used a 29 page Nike Earnings Call Conference and converted into a 1 page summary using LangChain.     
+Imagine we have tons of pdf reports and we need to summarize each of these reports within a short period of time. Using human resources and manually summarizing each of these long reports on various topics would take hours to write, edit, complete and deploy. Generative AI has a rescue to make hunderds of long reports summary within minutes. As an use-case, we have demonstarted a 29 page Nike Earnings Call Conference Report converting into a 1 page summary using LangChain.     
 
 ### Actions and Result<a name="overview-actions"></a>
 
