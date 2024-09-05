@@ -34,11 +34,11 @@ Using OpenAI API key connecting to ChatGPT-3.50-turbo AI conversation, we write 
 
 ### Key Definition <a name="overview-definition"></a>
 
-Large Language Models (LLMs) are machine learning models that can comprehend and generate human language text.
+- Large Language Models (LLMs) are machine learning models that can comprehend and generate human language text.
 
-LangChain is a framework for developing applications powered by Large Language Models (LLMs). 
+- LangChain is a framework for developing applications powered by Large Language Models (LLMs). 
 
-PyPDFLoader(filepath).load() reads pdf file, splits text by page, index each page in standardized LangChain document structure with "metadata" and "page_content"
+- PyPDFLoader(filepath).load() reads pdf file, splits text by page, index each page in standardized LangChain document structure with "metadata" and "page_content"
 
 # Report Snapshot <a name="snapshot-report"></a>
 
