@@ -13,6 +13,7 @@ We have converted a 29 page Earnings Call Transcript from Nike to a 1 page bulle
     - [Context](#overview-context)
     - [Actions and Result](#overview-actions)
     - [Key Definition](#overview-definition)
+- [01. Report Snapshot](#snapshot-report)
 - [01. Loading Libraries](#loading-libraries)
 - [02. Load document and initialize model](#load-doc-initialize-model)
 - [03. Prompt Template and LLMChain to run queries against LLM](#Prompt-LLMChain)
@@ -39,13 +40,23 @@ LangChain is a framework for developing applications powered by Large Language M
 
 PyPDFLoader(filepath).load() reads pdf file, splits text by page, index each page in standardized LangChain document structure with "metadata" and "page_content"
 
+# Report Snapshot <a name="snapshot-report"></a>
+
+Following is a sanpshot of the Nike Earnings Call Conference Report. The Report is 29 page long. We summarize this report into 1 page seven bullet points using Open AI and LangChain.
+
+<br>
+
+<image src="/img/posts/Screenshot_Nike.png">
+
+<br>
+
 # Loading Libraries <a name="loading-libraries"></a>
 
 ```python
 # LIBRARIES AND SETUP
 
-# langchain community allows third party integration into langchain
-# langchain_community document_loader has many document loaders: 
+# langchain_community allows third party integration into langchain
+# langchain_community document_loader has many document loaders, e.g.,
 # google sheets, excel, pdf, csv, email, images, Microsoft suite, and many more. 
 
 from langchain_community.document_loaders import PyPDFLoader
