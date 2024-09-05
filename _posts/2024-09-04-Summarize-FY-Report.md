@@ -46,7 +46,7 @@ Following is a sanpshot of the Nike Earnings Call Conference Report. The Report 
 
 <br>
 
-<image src="/img/posts/Screenshot_Nike.png">
+![PDF Report](/img/posts/Screenshot_Nike.png)
 
 <br>
 
