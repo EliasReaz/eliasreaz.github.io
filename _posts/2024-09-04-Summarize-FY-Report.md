@@ -15,9 +15,10 @@ We have converted a 29 page Earnings Call Transcript from Nike to a 1 page bulle
     - [Key Definition](#overview-definition)
 - [01. Snapshot of pdf report to be summarized](#data-overview)
 - [02. Loading Libraries](#loading-libraries)
-- [03. Prompt Template and LLMChain to run queries against LLM](#Prompt-LLMChain)
-- [04. Response and Summary](#response)
-- [05. Streamlit deployment](#rf-title)
+- [03. Load document and initialize model](#load-doc-initialize-model)
+- [04. Prompt Template and LLMChain to run queries against LLM](#Prompt-LLMChain)
+- [05. Response](#response)
+- [06. Summary](#summary)
   
 ___
 
@@ -66,11 +67,31 @@ import yaml
 from pprint import pprint
 
 ```
+# Load document and initialize model <a name="load-doc-initialize-model"></a>
+```python
+# Load the document to be summarized
+doc_path = "/NIKE-Inc-Q3FY24-OFFICIAL-Transcript-FINAL.pdf"
+loader = PyPDFLoader(doc_path)
+# PyPDFLoader(filepath).load() reads pdf file, splits text by page, 
+# index each page in standardized LangChain document structure 
+# with "metadata" and "page_content"
+docs= loader.load()
+
+
+# Read the API KEY from a yml file
+OPENAI_KEY = yaml.safe_load(open("../credentials.yml"))['openai']
+# Initialize the model
+model = ChatOpenAI(
+    model="gpt-3.5-turbo",
+    temperature=0,
+    api_key=OPENAI_KEY
+    )
+```
 
 # Prompt Template and LLMChain to run queries against LLM <a name="Prompt-LLMChain"></a>
 
 ```python
-# 2.0 EXPANDING WITH PROMPT TEMPLATES
+# EXPANDING WITH PROMPT TEMPLATES
 customize_template = """
 Write a concise summary on this {text}
 
@@ -82,9 +103,56 @@ doc_prompt = PromptTemplate(input_variables=["text"],
                         )
 # Chain to run queries against LLMs.
 llm_chain = LLMChain(llm=model, prompt=doc_prompt)
-
-
 ```
+
+# Response <a name="response"></a>
+```python
+# The chain below takes a list of documents and first combines them into a single string.
+# It does this by formatting each document into a string with the `document_prompt` and
+# then joining them together with `document_separator`. It then adds that new string to
+# the inputs with the variable name set by `document_variable_name`.
+# Those inputs are then passed to the `llm_chain`.
+
+chain = StuffDocumentsChain(
+            llm_chain=llm_chain,
+            document_variable_name="text"
+        )
+
+response = chain.invoke(docs ,metadata="text")
+```
+
+# Summary <a name="summary"></a>
+
+```python
+pprint(response['output_text'])
+```
+
+'1. NIKE, Inc. reported fiscal 2024 Q3 results in line with expectations, but '
+ 'acknowledged the need to make adjustments to reach full potential.\n'
+ 
+ '2. The company is focusing on sharpening its focus on sport, driving new '
+ 'product innovation, enhancing brand marketing, and collaborating with '
+ 'wholesale partners.\n'
+ 
+ '3. NIKE is building a multiyear cycle of innovation, particularly in the Air '
+ 'platform, to bring freshness and newness to consumers.\n'
+ 
+ '4. The company is managing its product portfolio through a period of '
+ 'transition, which may result in near-term headwinds but is expected to drive '
+ 'long-term growth.\n'
+ 
+ '5. NIKE is accelerating innovation, storytelling, and consumer experience to '
+ 'drive brand distinction and growth.\n'
+ 
+ '6. The company expects revenue to grow approximately 1% for the full year, '
+ 'with a focus on expanding gross margins and disciplined cost controls.\n'
+ 
+ '7. NIKE is leveraging the upcoming Olympics as a catalyst for showcasing new '
+ 'products and driving brand impact and consumer connection through sport.'
+
+
+
+
 
 
 
