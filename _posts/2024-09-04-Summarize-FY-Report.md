@@ -50,6 +50,8 @@ Following is a sanpshot of the Nike Earnings Call Conference Report. The Report 
 
 <br>
 
+
+
 # Loading Libraries <a name="loading-libraries"></a>
 
 ```python
