@@ -14,7 +14,7 @@ exercise aims to determine the relative importance of each parameter with regard
     - [Context](#overview-context)
     - [Actions and Result](#overview-actions)
     - [Key Definition](#overview-definition)
-- [01. Report Snapshot](#snapshot-report)
+- [01. Dataset Snapshot](#dataset-snapshot)
 - [01. Loading Libraries](#loading-libraries)
 - [02. Load document and initialize model](#load-doc-initialize-model)
 - [03. Prompt Template and LLMChain to run queries against LLM](#Prompt-LLMChain)
@@ -44,44 +44,58 @@ The objective of this problem is to understand which parameters play an importan
 
 ### Key Definition <a name="overview-definition"></a>
 
-- Large Language Models (LLMs) are machine learning models that can comprehend and generate human language text.
+- Random Forest: An ensemble of multiple decision trees. Each tree is constructed using a random subset of the dataset and a random subset of features. The results of each tree is aggregated, for classification, by majority voting.
 
-- LangChain is a framework for developing applications powered by Large Language Models (LLMs). 
-
-- PyPDFLoader(filepath).load() reads pdf file, splits text by page, index each page in standardized LangChain document structure with "metadata" and "page_content"
-
-# Report Snapshot <a name="snapshot-report"></a>
-
-Following is a sanpshot of the Nike Earnings Call Conference Report. The Report is 29 page long. We summarize this report into 1 page seven bullet points using Open AI and LangChain.
-
-<br>
-
-![PDF Report](/img/posts/Screenshot_Nike.png)
+- XGBoost (eXtream Gradient Boosting): An ensemble model that builds trees sequentially, each new tree improves by learning from mistakes of the previous ones. Boosting combines multiple individual weak trees. After hundreads of iterations, weak learners are converted to strong learners. It is a supervised learning boosting algorithm that uses gradient descent.    
 
 
+# Dataset Snapshot <a name="dataset-snapshot"></a>
 
+travel_data:
+
+
+| ID |Gender |	Customer_Type |	Age	| Type_Travel |	Travel_Class | Travel_Distance | Departure_Delay_in_Mins | Arrival_Delay_in_Mins |
+| --- | --- |	--- |	---	| --- | --- | --- | --- | --- |
+| 98800001 | Female	| Loyal Customer| 52.0| 	| Business | 272 |	0.0 |	5.0 |
+|98800002 |	Male | Loyal Customer	 |48.0	|Personal Travel |Eco|	2200|	9.0|	0.0|
+|98800003 | Female |Loyal Customer |43.0 |	Business Travel|	Business|	1061|	77.0|	119.0|
+
+survey data
+
+| ID	| Overall_Experience | Seat_Comfort | Seat_Class | Arrival_Time_Convenient | Catering | Platform_Location | Onboard_Wifi_Service | Onboard_Entertainment | Online_Support | Ease_of_Online_Booking | Onboard_Service | Legroom |	Baggage_Handling |	CheckIn_Service |	Cleanliness	| Online_Boarding |
 
 
 # Loading Libraries <a name="loading-libraries"></a>
 
 ```python
-# LIBRARIES AND SETUP
+# Basic libraries of python for numeric and dataframe computations
+import numpy as np
+import pandas as pd
 
-# langchain_community allows third party integration into langchain
-# langchain_community document_loader has many document loaders, e.g.,
-# google sheets, excel, pdf, csv, email, images, Microsoft suite, and many more. 
+# Basic library for data visualization
+import matplotlib.pyplot as plt
 
-from langchain_community.document_loaders import PyPDFLoader
+# Slightly advanced library for data visualization
+import seaborn as sns
 
-# chatOpenAi handles API calls to OpenAI's chat completions via LangChain Standradized LLM Framework
-from langchain_openai import ChatOpenAI
-from langchain.chains.summarize import load_summarize_chain
+# import sklearn libraries
+from sklearn.utils import shuffle
+from sklearn.model_selection import (
+                train_test_split, 
+                cross_val_score, 
+                KFold)
+from sklearn.metrics import (
+            confusion_matrix, 
+            accuracy_score, 
+            precision_score, 
+            recall_score, 
+            f1_score, classification_report)
+from sklearn.preprocessing import OneHotEncoder
+# RandomForestCLassifier
+from sklearn.ensemble import RandomForestClassifier
 
-from langchain_core.prompts import PromptTemplate
-from langchain.chains.combine_documents.stuff import StuffDocumentsChain
-from langchain.chains.llm import LLMChain
-
-import yaml
-from pprint import pprint
+# Used to ignore the warning given as output of the code
+import warnings
+warnings.filterwarnings("ignore")
 
 ```
