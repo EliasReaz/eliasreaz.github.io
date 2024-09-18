@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Passengers' satisfaction in High Speed Trains - Investigating Key Features 
-image: "/posts/LangChain_logo.png"
+image: "/posts/bullet_train.png"
 tags: [Random Forest, XGBoost, Feature Importance, Python]
 ---
 
