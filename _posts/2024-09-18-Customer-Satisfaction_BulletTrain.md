@@ -237,11 +237,24 @@ y_pred_class1 = xgb_model_opt1.predict(X_test)
 | Accuracy |         |          |      0.9495 |     18876 |
 
 
-# Feature IMportance <a name="fi"></a>
+# Feature Importance <a name="fi"></a>
+
+<br>
+
+
+![FeatureImportance](/img/posts/Screenshot_feature_importance.png)
 
 
 
+# Summary<a name="summary"></a>
 
+- The project predicts customer satisfaction as 0 (unsatisfied) or 1 (satisfied). The customer is a Japanese bullet train service. The number of input features are 24. These are 'Gender', 'Customer_Type', 'Age', 'Type_Travel', 'Travel_Class', 'Travel_Distance', 'Departure_Delay_in_Mins', 'Arrival_Delay_in_Mins', 'Overall_Experience', 'Seat_Comfort', 'Seat_Class', 'Arrival_Time_Convenient', 'Catering', 'Platform_Location', 'Onboard_Wifi_Service', 'Onboard_Entertainment', 'Online_Support', 'Ease_of_Online_Booking', 'Onboard_Service', 'Legroom', 'Baggage_Handling', 'CheckIn_Service', 'Cleanliness', 'Online_Boarding'. The number of observations used for training is around 94.3 K.
+
+- Two Classification models are used: Random Forest and XGBoost. For both of these models RandomizedSearchCV is used to find suitable hyperparamerts.
+
+- Based on accuracy, Random Forest gives 90% accuracy, while XGBoost gives 95% accuracy. Therefore, XGBoost is selected to use for the prediction of overall passenger experience.
+
+- Most influencial features that drive customer satisfaction are Seat Comfort, Onboard Entertainment, Checkin Service, Baggage Handling, Online support, Cleanliness.
 
 
 
