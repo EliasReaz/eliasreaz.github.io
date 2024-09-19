@@ -17,6 +17,10 @@ exercise aims to determine the relative importance of each parameter with regard
 - [01. Dataset Snapshot](#dataset-snapshot)
 - [02. Loading Libraries](#loading-libraries)
 - [03. Exploratory Data Analysis](#eda)
+- [04. Random Forest Classifier](#rf)
+- [05. XGBoost Classifier](#xgboost)
+- [06. Feature importance](#fi)
+- [07. Summary](#summary)
 
   
 ___
@@ -112,3 +116,136 @@ warnings.filterwarnings("ignore")
 - Business Travellers showed higher satisfied experience. 
 - By Travel Class, Economy class travellers are 52% and Business are 48%.
 - By loyalty, Loyal Customers are 82%.
+
+<br>
+
+![Gender](/img/posts/Screenshot_gender.png)
+
+<br>
+
+<br>
+
+![Gender](/img/posts/Screenshot_customertype.png)
+
+<br>
+
+<br>
+
+![Gender](/img/posts/Screenshot_onboard_entertainment.png)
+
+<br>
+
+
+
+# Random Forest Classifier<a name="rf"></a>
+
+```python
+# Choose the type of classifier 
+rf_tuned = RandomForestClassifier(random_state = 42)
+
+# Grid of parameters to choose from
+parameters = {"n_estimators": [200, 300, 500, 600],
+    "max_depth": [4, 5, 6],
+    "min_samples_leaf": [20, 25],
+    "min_samples_split": [3, 5],
+    'max_features': [5, 7],
+    "criterion": ["entropy"],
+      }
+# Run the grid search on the training data using cv=5
+grid_obj = RandomizedSearchCV(estimator=rf_tuned, 
+                              param_distributions = parameters, 
+                              cv = 5, 
+                              n_iter=10,
+                              scoring='accuracy',  
+                              verbose=3, 
+                              # error_score="raise"
+                             )
+
+grid_obj = grid_obj.fit(X_train, y_train)
+best_param_rf = grid_obj.best_params_
+# Instantiate the classifier with the best parameter
+random_forest = RandomForestClassifier(**best_param_rf)
+# Fit with train data
+random_forest.fit(X_train, y_train)
+# Predict
+y_pred_rf_class = random_forest.predict(X_test)
+print("Random Forest Classifier with GridSearchCV: Classification Report (Test set)")
+print("*"*50)
+print(classification_report(y_true = y_test, y_pred = y_pred_rf_class, digits=4))
+```
+
+<br>
+
+| Overall Experience      | precision | recall | f1-score | support |
+| ---   | --- | --- | --- | --- |         
+|  0 (unsatisfied)   | 0.8946 |   0.8841|    0.8893|      8557|
+|  1  (satisfied) |  0.9048 |    0.9137 |    0.9092 |     10319 |
+| Accuracy |         |          |      0.9002 |     18876 |
+
+
+# XGBoost CLassifier <a name="xgboost"></a>
+
+```python
+param_dist = {
+    'max_depth': stats.randint(3, 15),
+    'learning_rate': stats.uniform(0.01, 0.3),
+    'subsample': stats.uniform(0.6, 0.4),
+    'n_estimators': stats.randint(50, 200),
+    'gamma': stats.uniform(0, 0.5),
+    'colsample_bytree': stats.uniform(0.5, 0.5),
+    'min_child_weight': stats.randint(1, 10),
+    'scale_pos_weight': stats.uniform(1, 10)
+}
+
+
+# Create the XGBoost model object
+xgb_model = xgb.XGBClassifier()
+
+# Create the RandomizedSearchCV object
+random_search = RandomizedSearchCV(
+                    estimator = xgb_model, 
+                    param_distributions = param_dist, 
+                    n_iter=50, 
+                    cv=10, 
+                    scoring='accuracy',
+                    n_jobs = 1, # use all resources, i.e., all available cores
+                    verbose=3, 
+                    )
+
+# Fit the RandomizedSearchCV object to the training data
+random_search.fit(X_train, y_train)
+# Print the best set of hyperparameters and the corresponding score
+print("Best set of hyperparameters: ", random_search.best_params_)
+print("Best score: ", random_search.best_score_)
+
+b_param  = random_search.best_params_
+
+xgb_model_opt1 = xgb.XGBClassifier(**b_param)
+
+xgb_model_opt1.fit(X_train, y_train)
+
+y_pred_class1 = xgb_model_opt1.predict(X_test)
+```
+
+<br>
+
+
+| Overall Experience      | precision | recall | f1-score | support |
+| ---   | --- | --- | --- | --- |         
+|  0 (unsatisfied)   | 0.9508 | 0.9371 |  0.9439|      8557|
+|  1  (satisfied) |  0.9485 |    0.9598 |    0.9541 |     10319 |
+| Accuracy |         |          |      0.9495 |     18876 |
+
+
+# Feature IMportance <a name="fi"></a>
+
+
+
+
+
+
+
+
+
+
+
