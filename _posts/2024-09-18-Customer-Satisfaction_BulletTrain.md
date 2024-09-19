@@ -176,6 +176,8 @@ print(classification_report(y_true = y_test, y_pred = y_pred_rf_class, digits=4)
 
 <br>
 
+The Random Forest Classifier shows 90% accuracy on the test dataset. 
+
 | Overall Experience      | precision | recall | f1-score | support |
 | ---   | --- | --- | --- | --- |         
 |  0 (unsatisfied)   | 0.8946 |   0.8841|    0.8893|      8557|
@@ -183,7 +185,7 @@ print(classification_report(y_true = y_test, y_pred = y_pred_rf_class, digits=4)
 | Accuracy |         |          |      0.9002 |     18876 |
 
 
-# XGBoost CLassifier <a name="xgboost"></a>
+# XGBoost Classifier <a name="xgboost"></a>
 
 ```python
 param_dist = {
@@ -229,6 +231,8 @@ y_pred_class1 = xgb_model_opt1.predict(X_test)
 
 <br>
 
+
+XGBoost provides 95% accuracy on the test dataset.
 
 | Overall Experience      | precision | recall | f1-score | support |
 | ---   | --- | --- | --- | --- |         
