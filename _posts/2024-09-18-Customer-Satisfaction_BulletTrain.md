@@ -16,10 +16,8 @@ exercise aims to determine the relative importance of each parameter with regard
     - [Key Definition](#overview-definition)
 - [01. Dataset Snapshot](#dataset-snapshot)
 - [02. Loading Libraries](#loading-libraries)
-- [03. Exploratory Data Analysis (#eda)]
-- [04. Prompt Template and LLMChain to run queries against LLM](#Prompt-LLMChain)
-- [05. Response](#response)
-- [06. Summary](#summary)
+- [03. Exploratory Data Analysis](#eda)
+
   
 ___
 
