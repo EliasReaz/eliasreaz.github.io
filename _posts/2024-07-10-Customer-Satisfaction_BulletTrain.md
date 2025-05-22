@@ -10,17 +10,18 @@ exercise aims to determine the relative importance of each parameter with regard
 
 # Table of contents
 
-- [00. Project Overview](#overview-main)
-    - [Context](#overview-context)
-    - [Actions and Result](#overview-actions)
-    - [Key Definition](#overview-definition)
-- [01. Dataset Snapshot](#dataset-snapshot)
-- [02. Loading Libraries](#loading-libraries)
-- [03. Exploratory Data Analysis](#eda)
-- [04. Random Forest Classifier](#rf)
-- [05. XGBoost Classifier](#xgboost)
-- [06. Feature importance](#fi)
-- [07. Summary](#summary)
+- [Table of contents](#table-of-contents)
+- [Project Overview  ](#project-overview--)
+    - [Context ](#context-)
+    - [Actions and Result](#actions-and-result)
+    - [Key Definition ](#key-definition-)
+- [Dataset Snapshot ](#dataset-snapshot-)
+- [Loading Libraries ](#loading-libraries-)
+- [Exploratory Data Analysis  ](#exploratory-data-analysis--)
+- [Random Forest Classifier](#random-forest-classifier)
+- [XGBoost Classifier ](#xgboost-classifier-)
+- [Feature Importance ](#feature-importance-)
+- [Summary](#summary)
 
   
 ___
