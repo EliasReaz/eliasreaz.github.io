@@ -9,7 +9,7 @@ plugins:
 #-------------------------------
 # General Site Settings
 title: Reaz Elias
-description: "Hi, I'm Reaz, a Data Scientist & Analyst.  My portfolio site showcases interesting projects I've recently undertaken, with a strong emphasis on business impact. Please also look at my Github & LinkedIn."
+description: "Hi, I'm Reaz Elias, a Data Scientist, Machine Learning Specialist, & Data Analyst.  My portfolio site showcases interesting projects I've recently undertaken, with a strong emphasis on business impact. Please also look at my Github & LinkedIn."
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
@@ -17,7 +17,7 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # About Section
 subtitle: Data Science <span style="color:#f58506"> Portfolio </span>
 location: "Toronto, Canada"
-resume_url: /docs/Resume_EliasReaz_0302025.pdf
+resume_url: /docs/Resume-EliasReaz.pdf
 avatar_image: /img/old_photo_1.jpg
 
 #-------------------------------
