@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Targeting Smarter: Predicting Customer Signups Using Machine Learning
+title: Targeting Smarter - Predicting Customer Signups Using Machine Learning
 image: "/posts/classification-title-img.png"
 tags: [Customer Targeting, Machine Learning, Classification, Python]
 ---
