@@ -9,7 +9,13 @@ plugins:
 #-------------------------------
 # General Site Settings
 title: Reaz Elias
-description: "Hi, I'm Reaz Elias, a Data Scientist, Machine Learning Specialist, & Data Analyst.  My portfolio site showcases interesting projects I've recently undertaken, with a strong emphasis on business impact. Please also look at my Github & LinkedIn."
+description: "## 👋 About Me
+
+I’m Reaz Elias - a Data Scientist with a passion for solving real-world problems using data.
+With a PhD in Industrial Engineering, over three years of startup experience, and recent certifications in machine learning and cloud (AWS), I bring a unique blend of research, industry, and teaching experience.
+My technical toolkit includes Python, SQL, Scikit-learn, XGBoost, and cloud tools like S3 and SageMaker. I'm especially drawn to projects that involve customer insights, NLP, or deploying ML models at scale.
+Currently open to full-time roles where I can contribute meaningfully — whether through predictive modeling, analytics, or building production-grade ML pipelines.
+"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
