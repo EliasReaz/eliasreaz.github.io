@@ -36,7 +36,7 @@ df['Sales Count_rolling_14'] = df['Sales Count'].shift(1).rolling(window=14).mea
 
 ## 🧭 Exploratory Data Analysis
 
-![Redemption Count History](../img/posts/redemption_count_history_2022_2025.png)
+![Redemption Count History](/img/posts/redemption_count_history_2022_2025.png)
 
 - **Clear seasonality**: Demand spikes around summer months (June–August).
 - **Weekly patterns**: Higher redemptions on weekends.
@@ -80,7 +80,7 @@ LightGBM (Light Gradient Boosting Machine) is a fast, efficient gradient boostin
 
 ## 📈 LightGBM Quantile Forecast
 
-![LightGBM CI Prediction](../img/posts/lgbm_quantile_ci_predict.png)
+![LightGBM CI Prediction](/img/posts/lgbm_quantile_ci_predict.png)
 
 - **Model**: LightGBM with quantile regression
 - **MAE**: 2,179
@@ -105,7 +105,7 @@ SHAP (SHapley Additive exPlanations) explains individual predictions by computin
 
 ## 🔍 SHAP Output for LightGBM
 
-![SHAP Plot](../img/posts/shap_lightgbm.png)
+![SHAP Plot](/img/posts/shap_lightgbm.png)
 
 - **Top drivers**:
   - `Sales Count (rolling 7)`, `rolling14`, `dayofweek`
@@ -158,7 +158,7 @@ def make_holidays():
 
 ## 📊 Prophet Forecast Output
 
-![Prophet Forecast](../img/posts/prophet_plot_v1.png)
+![Prophet Forecast](/img/posts/prophet_plot_v1.png)
 
 * **Model**: Prophet with holidays + regressors
 * **MAE**: 2017
@@ -167,7 +167,7 @@ def make_holidays():
 
 ## 🔍 Prophet Components
 
-![Prophet Components](../img/posts/prophet_plot_components.png)
+![Prophet Components](/img/posts/prophet_plot_components.png)
 
 * **Trend**: Slight dip after 2023
 * **Holidays**: Canada Day and Christmas have measurable impacts
