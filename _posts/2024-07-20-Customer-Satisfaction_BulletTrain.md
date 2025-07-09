@@ -92,8 +92,11 @@ These models provided interpretable insights into which service aspects (e.g., c
 - Business Travellers showed higher satisfied experience. 
 - By Travel Class, Economy class travellers are 52% and Business are 48%.
 - By loyalty, Loyal Customers are 82%.
+  
 ![Gender](/img/posts/Screenshot_gender.png)
+
 ![Customer Type](/img/posts/Screenshot_customertype.png)
+
 ![Gender](/img/posts/Screenshot_onboard_entertainment.png)
 
 ## Random Forest Classifier
