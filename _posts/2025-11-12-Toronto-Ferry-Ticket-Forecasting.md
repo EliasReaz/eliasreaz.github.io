@@ -1,4 +1,10 @@
-# Toronto Ferry Ticket Demand Forecasting using SARIMA and Prophet with MLOps Integration (DVC & MLflow)
+---
+layout: post
+title: Toronto Ferry Ticket Demand Forecasting using SARIMA and Prophet with MLOps Integration (DVC & MLflow) 
+image: "/posts/toronto-islands-cropped.png"
+tags: [Time Series Forecasting, SARIMA, Prophet, MLflow, DVC]
+date: 2025-11-12
+---
 
 This project demonstrates a complete time series forecasting workflow using SARIMA and Prophet. It includes preprocessing, exploratory analysis, model fitting, and forecasting for a 30-day horizon. The pipeline is modular, reproducible, and designed for extensibility.
 
